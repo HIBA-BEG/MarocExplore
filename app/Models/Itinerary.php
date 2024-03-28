@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Itinerary extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'title',
+        'category',
+        'image',
+        'departure',
+        'arrival',
+        'duration',
+        'user_id',
+    ];
+
+    public function destinations()
+{
+    return $this->hasMany(Destination::class);
+}
+
+}
