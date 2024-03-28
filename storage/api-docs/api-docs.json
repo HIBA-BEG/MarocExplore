@@ -1,0 +1,1221 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User API",
+        "description": "API for managing users",
+        "contact": {
+            "email": "beghiba@gmail.com"
+        },
+        "license": {
+            "name": "BEGHDI Hibz",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/indexAll": {
+            "get": {
+                "tags": [
+                    "Itineraries"
+                ],
+                "summary": "Retrieve all itineraries with destinations",
+                "operationId": "dc63a3bc5fc7142cc0dec8ee82e2c775",
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved itineraries with destinations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "itineraries": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Itinerary ID",
+                                                        "type": "integer",
+                                                        "format": "int64"
+                                                    },
+                                                    "title": {
+                                                        "description": "Itinerary title",
+                                                        "type": "string"
+                                                    },
+                                                    "category": {
+                                                        "description": "Itinerary category",
+                                                        "type": "string"
+                                                    },
+                                                    "image": {
+                                                        "description": "Itinerary image URL",
+                                                        "type": "string"
+                                                    },
+                                                    "departure": {
+                                                        "description": "Itinerary departure date",
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "arrival": {
+                                                        "description": "Itinerary arrival date",
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "duration": {
+                                                        "description": "Itinerary duration",
+                                                        "type": "string"
+                                                    },
+                                                    "user_id": {
+                                                        "description": "User ID associated with the itinerary",
+                                                        "type": "integer",
+                                                        "format": "int64"
+                                                    },
+                                                    "destinations": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "properties": {
+                                                                "id": {
+                                                                    "description": "Destination ID",
+                                                                    "type": "integer",
+                                                                    "format": "int64"
+                                                                },
+                                                                "name": {
+                                                                    "description": "Destination name",
+                                                                    "type": "string"
+                                                                },
+                                                                "housing": {
+                                                                    "description": "Destination housing",
+                                                                    "type": "string"
+                                                                },
+                                                                "list": {
+                                                                    "description": "Destination list",
+                                                                    "type": "string"
+                                                                },
+                                                                "itinerary_id": {
+                                                                    "description": "Itinerary ID associated with the destination",
+                                                                    "type": "integer",
+                                                                    "format": "int64"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/itineraries": {
+            "post": {
+                "tags": [
+                    "Itineraries"
+                ],
+                "summary": "Create a new itinerary with destinations",
+                "operationId": "9ddf03b1ccb2fb24c86fa810f0614b38",
+                "requestBody": {
+                    "description": "Itinerary details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "category",
+                                    "image",
+                                    "departure",
+                                    "arrival",
+                                    "duration",
+                                    "destinations"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "description": "Category of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "description": "Image URL of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "departure": {
+                                        "description": "Departure date of the itinerary",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "arrival": {
+                                        "description": "Arrival date of the itinerary",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "duration": {
+                                        "description": "Duration of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "destinations": {
+                                        "description": "List of destinations",
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "name",
+                                                "housing",
+                                                "list"
+                                            ],
+                                            "properties": {
+                                                "name": {
+                                                    "description": "Name of the destination",
+                                                    "type": "string"
+                                                },
+                                                "housing": {
+                                                    "description": "Housing details of the destination",
+                                                    "type": "string"
+                                                },
+                                                "list": {
+                                                    "description": "List details of the destination",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Itinerary created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Route with its destinations successfully created"
+                                        },
+                                        "itinerary": {
+                                            "properties": {
+                                                "title": {
+                                                    "description": "Title of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "category": {
+                                                    "description": "Category of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "image": {
+                                                    "description": "Image URL of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "departure": {
+                                                    "description": "Departure date of the itinerary",
+                                                    "type": "string",
+                                                    "format": "date"
+                                                },
+                                                "arrival": {
+                                                    "description": "Arrival date of the itinerary",
+                                                    "type": "string",
+                                                    "format": "date"
+                                                },
+                                                "duration": {
+                                                    "description": "Duration of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "destinations": {
+                                                    "description": "List of destinations",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "name": {
+                                                                "description": "Name of the destination",
+                                                                "type": "string"
+                                                            },
+                                                            "housing": {
+                                                                "description": "Housing details of the destination",
+                                                                "type": "string"
+                                                            },
+                                                            "list": {
+                                                                "description": "List details of the destination",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "An error occurred"
+                                        },
+                                        "error": {
+                                            "description": "Error details",
+                                            "type": "string",
+                                            "example": "Error details"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/itineraries/search": {
+            "post": {
+                "tags": [
+                    "Itineraries"
+                ],
+                "summary": "Search itineraries by title",
+                "operationId": "45cd3a6533a4bc64988a652a399c1662",
+                "requestBody": {
+                    "description": "Search parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title to search for",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Itineraries found successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "itineraries": {
+                                            "description": "List of itineraries matching the search criteria",
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Itinerary ID",
+                                                        "type": "integer",
+                                                        "format": "int64"
+                                                    },
+                                                    "title": {
+                                                        "description": "Title of the itinerary",
+                                                        "type": "string"
+                                                    },
+                                                    "category": {
+                                                        "description": "Category of the itinerary",
+                                                        "type": "string"
+                                                    },
+                                                    "image": {
+                                                        "description": "Image URL of the itinerary",
+                                                        "type": "string"
+                                                    },
+                                                    "departure": {
+                                                        "description": "Departure date of the itinerary",
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "arrival": {
+                                                        "description": "Arrival date of the itinerary",
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "duration": {
+                                                        "description": "Duration of the itinerary",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "description": "Validation errors",
+                                            "type": "object",
+                                            "example": {
+                                                "title": [
+                                                    "The title field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/itineraries/filter": {
+            "post": {
+                "tags": [
+                    "Itineraries"
+                ],
+                "summary": "Filter itineraries by category and/or duration",
+                "operationId": "9a11fcc0b79d9ad798bf424846e5fd1d",
+                "requestBody": {
+                    "description": "Filter parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "category": {
+                                        "description": "Category to filter by",
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "description": "Duration to filter by",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Itineraries filtered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "itineraries": {
+                                            "description": "List of filtered itineraries",
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "Itinerary ID",
+                                                        "type": "integer",
+                                                        "format": "int64"
+                                                    },
+                                                    "title": {
+                                                        "description": "Title of the itinerary",
+                                                        "type": "string"
+                                                    },
+                                                    "category": {
+                                                        "description": "Category of the itinerary",
+                                                        "type": "string"
+                                                    },
+                                                    "image": {
+                                                        "description": "Image URL of the itinerary",
+                                                        "type": "string"
+                                                    },
+                                                    "departure": {
+                                                        "description": "Departure date of the itinerary",
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "arrival": {
+                                                        "description": "Arrival date of the itinerary",
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    },
+                                                    "duration": {
+                                                        "description": "Duration of the itinerary",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "description": "Validation errors",
+                                            "type": "object",
+                                            "example": {
+                                                "category": [
+                                                    "The category must be a string."
+                                                ],
+                                                "duration": [
+                                                    "The duration must be a string."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/itineraries/{id}": {
+            "delete": {
+                "tags": [
+                    "Itineraries"
+                ],
+                "summary": "Delete an itinerary",
+                "operationId": "f65090001e6f5de3421bde54a3dd140f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the itinerary to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Itinerary deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Itinerary deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "You are not authorized to delete this itinerary."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "Itinerary not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/itineraries/update/{id}": {
+            "put": {
+                "tags": [
+                    "Itineraries"
+                ],
+                "summary": "Update an itinerary",
+                "operationId": "715cd899e51a5be84a9cb8d90729fcfb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the itinerary to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Itinerary data to update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "category",
+                                    "image",
+                                    "departure",
+                                    "arrival",
+                                    "duration",
+                                    "destinations"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Title of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "description": "Category of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "description": "Image URL of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "departure": {
+                                        "description": "Departure date of the itinerary",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "arrival": {
+                                        "description": "Arrival date of the itinerary",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "duration": {
+                                        "description": "Duration of the itinerary",
+                                        "type": "string"
+                                    },
+                                    "destinations": {
+                                        "description": "List of destinations",
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "name",
+                                                "housing",
+                                                "list"
+                                            ],
+                                            "properties": {
+                                                "name": {
+                                                    "description": "Name of the destination",
+                                                    "type": "string"
+                                                },
+                                                "housing": {
+                                                    "description": "Housing information of the destination",
+                                                    "type": "string"
+                                                },
+                                                "list": {
+                                                    "description": "List of attractions in the destination",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Itinerary updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Itinerary with its destinations updated successfully"
+                                        },
+                                        "itinerary": {
+                                            "description": "Updated itinerary object",
+                                            "properties": {
+                                                "id": {
+                                                    "description": "Itinerary ID",
+                                                    "type": "integer",
+                                                    "format": "int64"
+                                                },
+                                                "title": {
+                                                    "description": "Title of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "category": {
+                                                    "description": "Category of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "image": {
+                                                    "description": "Image URL of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "departure": {
+                                                    "description": "Departure date of the itinerary",
+                                                    "type": "string",
+                                                    "format": "date"
+                                                },
+                                                "arrival": {
+                                                    "description": "Arrival date of the itinerary",
+                                                    "type": "string",
+                                                    "format": "date"
+                                                },
+                                                "duration": {
+                                                    "description": "Duration of the itinerary",
+                                                    "type": "string"
+                                                },
+                                                "destinations": {
+                                                    "description": "List of destinations",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "description": "Destination ID",
+                                                                "type": "integer",
+                                                                "format": "int64"
+                                                            },
+                                                            "name": {
+                                                                "description": "Name of the destination",
+                                                                "type": "string"
+                                                            },
+                                                            "housing": {
+                                                                "description": "Housing information of the destination",
+                                                                "type": "string"
+                                                            },
+                                                            "list": {
+                                                                "description": "List of attractions in the destination",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "You are not authorized to modify this itinerary."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "Itinerary not found."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "description": "Validation errors",
+                                            "type": "object",
+                                            "example": {
+                                                "title": [
+                                                    "The title field is required."
+                                                ],
+                                                "category": [
+                                                    "The category field is required."
+                                                ],
+                                                "image": [
+                                                    "The image field is required."
+                                                ],
+                                                "departure": [
+                                                    "The departure field is required."
+                                                ],
+                                                "arrival": [
+                                                    "The arrival field is required."
+                                                ],
+                                                "duration": [
+                                                    "The duration field is required."
+                                                ],
+                                                "destinations": [
+                                                    "The destinations field is required."
+                                                ],
+                                                "destinations.*.name": [
+                                                    "The name field is required."
+                                                ],
+                                                "destinations.*.housing": [
+                                                    "The housing field is required."
+                                                ],
+                                                "destinations.*.list": [
+                                                    "The list field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new user",
+                "description": "Register a new user.",
+                "operationId": "c0354e671ce642c7b4ff996bc4e475a0",
+                "requestBody": {
+                    "description": "User registration details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "c_password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "c_password": {
+                                        "description": "Confirm password, must match the 'password' field",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User registered successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "description": "Access token for the registered user",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "description": "Name of the registered user",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "description": "Validation errors",
+                                            "type": "object",
+                                            "example": {
+                                                "email": [
+                                                    "The email field is required."
+                                                ],
+                                                "password": [
+                                                    "The password field is required."
+                                                ],
+                                                "name": [
+                                                    "The name field is required."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login user",
+                "operationId": "dde0e6a0694ae97f804fba7d40433c68",
+                "requestBody": {
+                    "description": "User login details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged in successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "description": "User ID",
+                                                    "type": "integer",
+                                                    "format": "int64"
+                                                },
+                                                "name": {
+                                                    "description": "User's name",
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "description": "User's email",
+                                                    "type": "string",
+                                                    "format": "email"
+                                                },
+                                                "created_at": {
+                                                    "description": "User creation datetime",
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "updated_at": {
+                                                    "description": "User update datetime",
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "authorization": {
+                                            "properties": {
+                                                "token": {
+                                                    "description": "Access token for the logged in user",
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "description": "Type of token",
+                                                    "type": "string"
+                                                },
+                                                "expires_in": {
+                                                    "description": "Token expiration time in seconds",
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "error"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "Invalid Credentials"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Logout the user",
+                "operationId": "0b6b00e1e436126529647bb1b75c02d9",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "Status of the response",
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Successfully logged out"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Refresh the authentication token",
+                "operationId": "b2b6bdbb0293e7e4e5e292b24a16b15e",
+                "responses": {
+                    "200": {
+                        "description": "Token refreshed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "description": "User object",
+                                            "properties": {
+                                                "id": {
+                                                    "description": "User ID",
+                                                    "type": "integer",
+                                                    "format": "int64"
+                                                },
+                                                "name": {
+                                                    "description": "User's name",
+                                                    "type": "string"
+                                                },
+                                                "email": {
+                                                    "description": "User's email address",
+                                                    "type": "string",
+                                                    "format": "email"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "authorisation": {
+                                            "description": "Authorization information",
+                                            "properties": {
+                                                "token": {
+                                                    "description": "Refreshed access token",
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "description": "Token type (e.g., bearer)",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    }
+}
