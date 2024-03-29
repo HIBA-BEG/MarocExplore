@@ -27,7 +27,7 @@ Route::middleware('auth:api')->post('logout',[UserAuthController::class,'logout'
 //     return $request->user();
 // });
 
-Route::middleware('auth:api')->post('store', [ItineraryController::class, 'store']);
+Route::post('store', [ItineraryController::class, 'store']);
 Route::middleware('auth:api')->get('itineraryy', [ItineraryController::class, 'index']);
 
 Route::middleware('auth:api')->put('itineraries/update/{id}', [ItineraryController::class, 'update']);

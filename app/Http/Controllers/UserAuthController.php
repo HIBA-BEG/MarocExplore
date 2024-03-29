@@ -12,7 +12,7 @@ namespace App\Http\Controllers;
  *             email="beghiba@gmail.com"
  *         ),
  *         @OA\License(
- *             name="BEGHDI Hibz",
+ *             name="BEGHDI Hiba",
  *             url="https://opensource.org/licenses/MIT"
  *         )
  *     )

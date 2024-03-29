@@ -12,22 +12,13 @@ class ItineraryController extends Controller
 {
     // public function index()
     // {
-    //     $user = auth()->user();
+    //     $user = auth()->user(); 
     //     $itineraries = $user->itineraries()->with('destinations')->get();
     //     return response()->json([
     //         'status' => 'success',
     //         'itineraries' => $itineraries,
     //     ]);
     // }
-    public function index()
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $itineraries = $user->itineraries()->with('destinations')->get();
-        return response()->json([
-            'status' => 'success',
-            'itineraries' => $itineraries,
-        ]);
-    }
 
     /**
      * @OA\Get(
@@ -1041,51 +1032,51 @@ class ItineraryController extends Controller
         }
     }
 
-    public function StoreListeAvisiter($itineraryId)
-    {
-        try {
-            $user = Auth::user();
+    // public function StoreListeAvisiter($itineraryId)
+    // {
+    //     try {
+    //         $user = Auth::user();
 
-            $itinerary = Itinerary::find($itineraryId);
-            if (!$itinerary) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Itinéraire non trouvé.',
-                ], 404);
-            }
+    //         $itinerary = Itinerary::find($itineraryId);
+    //         if (!$itinerary) {
+    //             return response()->json([
+    //                 'status' => 'error',
+    //                 'message' => 'Itinéraire non trouvé.',
+    //             ], 404);
+    //         }
 
-            $user->itinerary()->attach($itineraryId, ['created_at' => now(), 'updated_at' => now()]);
+    //         $user->itinerary()->attach($itineraryId, ['created_at' => now(), 'updated_at' => now()]);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Itinéraire ajouté à la liste à visualiser avec succès.',
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Une erreur s\'est produite lors de l\'ajout de l\'itinéraire à la liste à visualiser.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Itinéraire ajouté à la liste à visualiser avec succès.',
+    //         ], 200);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'Une erreur s\'est produite lors de l\'ajout de l\'itinéraire à la liste à visualiser.',
+    //             'error' => $e->getMessage(),
+    //         ], 500);
+    //     }
+    // }
 
-    public function DisplaylisteAVisiter()
-    {
-        try {
-            $user = Auth::user();
+    // public function DisplaylisteAVisiter()
+    // {
+    //     try {
+    //         $user = Auth::user();
 
-            $itineraries = $user->itinerary()->with('destinations')->get();
+    //         $itineraries = $user->itinerary()->with('destinations')->get();
 
-            return response()->json([
-                'status' => 'success',
-                'itineraries' => $itineraries,
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Une erreur s\'est produite lors de la récupération de la liste des itinéraires à visiter.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
-    }
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'itineraries' => $itineraries,
+    //         ], 200);
+    //     } catch (\Exception $e) {
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'Une erreur s\'est produite lors de la récupération de la liste des itinéraires à visiter.',
+    //             'error' => $e->getMessage(),
+    //         ], 500);
+    //     }
+    // }
 }
